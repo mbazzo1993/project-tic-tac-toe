@@ -1,1 +1,142 @@
+/* Styling for testing only */
 
+* {
+    /* border: 1px solid red; */
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+
+    height: 100vh;
+    width: 100vw;
+
+    padding: 0;
+    margin: 0;
+
+    font-family: 'Futura', 'sans-serif';
+}
+
+.menu-wrapper {
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.menu-wrapper > button {
+    width: 60%;
+    height: 40px;
+
+    font-size: large;
+}
+
+.screen {
+    width: 400px;
+    height: 300px;
+
+    background-color: rgb(68, 68, 68);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen > span {
+    color: white;
+    width: 90%;
+}
+
+.board-wrapper {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.board{
+    width: 70%;
+    height: 65%;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+
+    border: 1px solid black;
+
+}
+
+.cell {
+    border: 1px solid black;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cell > span {
+    font-size: 120px;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0; /* remove default padding */
+
+    list-style-type: none; /* remove bullets */
+}
+
+li {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.8em;
+    box-sizing: border-box;
+}
+
+fieldset {
+    border: 0; /* remove default border */
+    width: 100%;
+    height: 100%;
+}
+
+fieldset > legend {
+    background-color: var(--form-bg-light);
+    color: var(--form-ctrl-bg-dark);
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    margin: 0;
+}
+
+.btn-menu {
+    width: 100%;
+
+    display: flex;
+    justify-content: end;
+}
+
+.btn-menu > button {
+    margin: 5px;
+
+    color: black;
+    background-color: white;
+    border: solid 2px black;
+    font-size: large;
+}
+
+.btn-menu > button:hover {
+    color: white;
+    background-color: black;
+}
