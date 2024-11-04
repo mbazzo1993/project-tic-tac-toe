@@ -12,7 +12,18 @@
 
   // Register event handlers
   const showModal = elemStartBtn.addEventListener("click", () => {
-    elemDialog.showModal();
+    if (elemStartBtn.innerText === 'Start Game') {
+        elemDialog.showModal();
+        return;
+    }
+
+
+    if (elemStartBtn.innerText === 'New Game') {
+        resetGame();
+        elemStartBtn.disable = true;
+        return;
+    }
+
   });
   const handleCancel = elemCancelBtn.addEventListener("click", () => {
     elemDialog.close();
@@ -76,6 +87,7 @@
       newGame.appendDrawResult();
       registerGameDrawMsg();
       newGame.setIsGameOn(false);
+      elemStartBtn.disabled = false;
       return;
     }
 
@@ -84,6 +96,7 @@
       newGame.appendWinResult();
       registerGameWonMsg();
       newGame.setIsGameOn(false);
+      elemStartBtn.disabled = false;
       return;
     }
   });
@@ -126,6 +139,16 @@
         
         Click the "New Game" button to start a new game.`;
     updateScreen(msg);
+  }
+
+  function resetGame() {
+    for (cell of elemBoard.children) {
+        cell.children[0].innerText = '';
+    }
+    newGame.resetGame();
+    newGame.setIsGameOn(true);
+    elemStartBtn.disabled = true;
+    getPlayerInput();
   }
 
   // FACTORIES
@@ -254,15 +277,15 @@
       let scoresObj = {};
       scoresObj[p1Name] = 0;
       scoresObj[p2Name] = 0;
-      scoresObj["draws"] = 0;
+      scoresObj.draws = 0;
 
       for (result of results) {
         if (result.res === "WIN") {
           scoresObj[result.winner.getName()] += 1;
         }
 
-        if (results.res === "DRAW") {
-          scoresObj["draws"] += 1;
+        if (result.res === "DRAW") {
+          scoresObj.draws += 1;
         }
       }
 
@@ -270,34 +293,20 @@
     }
 
     function resetGame() {
-      while (true) {
-        let ans = prompt(`Would you like to play again? (y/n) `);
-
-        if (ans.toLowerCase() === "n") {
-          console.log("GAME OVER");
-          return 0;
+        gameBoardObj.clearBoard();
+        currPlayerInd = 0;
+        // reassign players
+        if (playerArray[0].getName() === player1.getName()) {
+          playerArray[0] = player2;
+          player2.setSymbol("X");
+          playerArray[1] = player1;
+          player1.setSymbol("O");
+        } else {
+          playerArray[0] = player1;
+          player1.setSymbol("X");
+          playerArray[1] = player2;
+          player2.setSymbol("O");
         }
-
-        if (ans.toLowerCase() === "y") {
-          console.log("Resetting board...");
-          gameBoardObj.clearBoard();
-          currPlayerInd = 0;
-          // reassign players
-          if (playerArray[0].getName() === player1.getName()) {
-            playerArray[0] = player2;
-            player2.setSymbol("X");
-            playerArray[1] = player1;
-            player1.setSymbol("O");
-          } else {
-            playerArray[0] = player1;
-            player1.setSymbol("X");
-            playerArray[1] = player2;
-            player2.setSymbol("O");
-          }
-          gameBoardObj.logBoard();
-          return 1;
-        }
-      }
     }
 
     return {
@@ -312,6 +321,7 @@
       appendDrawResult,
       getResultsSummary,
       setIsGameOn,
+      resetGame
     };
   }
 
@@ -427,8 +437,8 @@
     }
 
     function clearBoard() {
-      for (i in board) {
-        for (j in row) {
+      for (let i = 0; i < 3 ; i++) {
+        for (let j = 0; j < 3 ; j++) {
           board[i][j] = "";
         }
       }
