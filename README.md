@@ -8,14 +8,14 @@
     2. [X] Determine all the functionality needed to make the game work and determine which objects / modules / factories they belong to.
     3. [X] Create code template + pseudo code.
 3. [X] Implement all code to have a working game in the console.
-4. [ ] Create an object to display / handle the DOM logic and write a function to render contents of the gameboard array to the page.
-    1. [ ] Create HTML and add styling
-    2. [ ] Include inputs for player names
-    3. [ ] Include button for starting / resetting the game
-    4. [ ] Include component to display instruction to user (i.e. who's turn it is)
-    5. [ ] Include component to summarize results at the end of the game (wins and draws for each player)
-5. [ ] Write functions that allow players to add marks to specific spots on the board by interacting with the appropriate DOM elements. Implement logic to keep players from placing in spots already taken.
-6. [ ] Implement an interface to let players put in their names, include a button to start / reset the game and add a display element to show results at end of the game.
+4. [X] Create an object to display / handle the DOM logic and write a function to render contents of the gameboard array to the page.
+    1. [X] Create HTML and add styling
+    2. [X] Include inputs for player names
+    3. [X] Include button for starting / resetting the game
+    4. [X] Include component to display instruction to user (i.e. who's turn it is)
+    5. [X] Include component to summarize results at the end of the game (wins and draws for each player)
+5. [X] Write functions that allow players to add marks to specific spots on the board by interacting with the appropriate DOM elements. Implement logic to keep players from placing in spots already taken.
+6. [X] Implement an interface to let players put in their names, include a button to start / reset the game and add a display element to show results at end of the game.
 
 ## Plan
 
