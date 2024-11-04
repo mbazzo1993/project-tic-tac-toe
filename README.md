@@ -64,3 +64,9 @@ __Object: Game__
           - If no winner and board is full, end game as tie
   - Array to keep track of iterations of the game
   - A restart function to start a new game
+
+  ## Updated Plan
+
+  - Now attempting to connec the game logic with the DOM updates necessary.
+  - Previously, had the game() factory include a run() method to control the flow of the game / define the game loop.
+  - Now will instead use event handling to control the game loop (i.e. no need for a run function). The event + the game state is enough info to determine what actions must be taken
