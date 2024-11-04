@@ -29,6 +29,7 @@
 
         newGame.setPlayer1Name(dataObject.p1Name);
         newGame.setPlayer2Name(dataObject.p2Name);
+        newGame.setIsGameOn(true);
 
         getPlayerInput();
     });
@@ -47,8 +48,8 @@
             elemCell = event.target.parentNode;
         }
 
-        const row = elemCell.dataset.row;
-        const col = elemCell.dataset.col;
+        const row = parseInt(elemCell.dataset.row);
+        const col = parseInt(elemCell.dataset.col);
         const placeXorORes = newGame.placeXorO(row,col);
         console.log(placeXorORes);
         const selectCellVal = (placeXorORes === -2) ? '' : newGame.getCurrentPlayerSymbol();
@@ -71,12 +72,14 @@
         if (placeXorORes === -1) { // game ends in a draw
             newGame.appendDrawResult();
             registerGameDrawMsg();
+            newGame.setIsGameOn(false);
             return;
         }
         
         if (placeXorORes === 1) { // we have a winner
             newGame.appendWinResult();
             registerGameWonMsg();
+            newGame.setIsGameOn(false);
             return;
         }
     });
@@ -95,17 +98,25 @@
 
     function registerGameWonMsg() {
         let msg;
-        msg = `${newGame.getCurrentPlayerName} has WON the game!!!!
+        msg = `${newGame.getCurrentPlayerName()} has WON the game!!!!
+
         Here is a summary of the results so far...
-        ${newGame.getResultsSummary()}`;
+
+        ${newGame.getResultsSummary()}
+        
+        Click the "New Game" button to start a new game.`;
         updateScreen(msg);
     }
 
     function registerGameDrawMsg() {
         let msg;
         msg = `The game ends in a DRAW!!!!
+
         Here is a summary of the results so far...
-        ${newGame.getResultsSummary()}`;
+
+        ${newGame.getResultsSummary()}
+        
+        Click the "New Game" button to start a new game.`;
         updateScreen(msg);
     }
 
@@ -119,7 +130,7 @@
         const player2 = player(player2Name, 'O');
         let playerArray = [player1, player2];
         let currPlayerInd = 0; // 'X' will start the game
-        let isGameOn = true;
+        let isGameOn = false;
     
         function runGameInConsole() { // game loop
             gameBoardObj.logBoard();
@@ -180,6 +191,10 @@
             return isGameOn;
         }
 
+        function setIsGameOn(setting) {
+            isGameOn = setting;
+        }
+
         function placeXorO(row,col) {
             return gameBoardObj.placeXorO(playerArray[currPlayerInd].getSymbol(), row, col);
         }
@@ -231,7 +246,7 @@
                 }
             }
 
-            return `${p1Name} WINS: ${scoresObj[p1Name]}; DRAWS: ${scoresObj['draws']} ;${scoresObj[p2Name]}`;
+            return `${p1Name}: ${scoresObj[p1Name]} | DRAWS: ${scoresObj['draws']} | ${p2Name}: ${scoresObj[p2Name]}`;
         }
     
         function resetGame() {
@@ -275,7 +290,8 @@
             changePlayer,
             appendWinResult,
             appendDrawResult,
-            getResultsSummary
+            getResultsSummary,
+            setIsGameOn
         };
     }
 
